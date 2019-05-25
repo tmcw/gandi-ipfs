@@ -8,12 +8,20 @@ const hash = process.argv[2];
 if (!hash) throw new Error(`Usage: gandi-txt hash`);
 
 const headers = {
-  "X-Api-Key": process.env.GANDI_TOKEN
+  "X-Api-Key": process.env.GANDI_TOKEN,
+  "Content-Type": "application/json"
 };
 
 const uuid = process.env.GANDI_DOMAIN_UUID;
 
 (async function() {
+  await await fetch(
+    `https://dns.api.gandi.net/api/v5/zones/${uuid}/records/@/TXT`,
+    {
+      headers,
+      method: "DELETE"
+    }
+  );
   const res = await (await fetch(
     `https://dns.api.gandi.net/api/v5/zones/${uuid}/records`,
     {
