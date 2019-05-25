@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fetch = require("node-fetch");
 
 if (!process.env.GANDI_TOKEN)
